@@ -12,8 +12,10 @@ def find_Va(resolution, ADC_value, ADC_voltage):
         return (ADC_value*ADC_voltage)/4095
     elif resolution == 14: # If it was 14-bit resolution
         return (ADC_value*ADC_voltage)/16383
+    elif resolution == 11:
+        return (ADC_value*ADC_voltage)/2047
     else:
-        return print("The resolution not match this function")
+        return "The resolution not match this function"
 
 # 2
 # Find the current(I) passing through R1 and LDR
@@ -32,3 +34,8 @@ def find_resistance_LDR(Va, I):
     return Va/I # R_LDR = V/I   ohms(unit)
 
 # 4
+
+
+# print(find_Va(11, 1365, 3.3))
+# print(find_current(3.3, 2.2, 5000))
+print(find_resistance_LDR(2.2, 0.00022))
