@@ -15,6 +15,6 @@ while True:
     # w = x*256 + y
     temp_cel = ((data[0]*256)+data[1])/128
     
-    print("Light detect as "+str(ldr.read())+" Lux")
+    print("Light detect as "+str(ldr.read())) # Did not do it in lux
     print("Temperature detect as "+str(temp_cel)+" °C")
     sleep(2)
