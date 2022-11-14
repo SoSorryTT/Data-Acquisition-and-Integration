@@ -31,6 +31,6 @@ setup(
     entry_points={
         'console_scripts': ['swagger_server=swagger_server.__main__:main']},
     long_description="""\
-    This API provides historical rainfall data over upper Chaopraya river basin between 1987 and 2021.  Raw data provided by Thai Meteorological Department (TMD).
+    This API provides historical rainfall data over upper Chaopraya river basin between 1987 and 2022.  Raw data provided by Thai Meteorological Department (TMD).
     """
 )

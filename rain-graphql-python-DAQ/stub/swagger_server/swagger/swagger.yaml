@@ -2,11 +2,11 @@ openapi: 3.0.0
 info:
   title: Chaopraya Rainfalls API
   description: This API provides historical rainfall data over upper Chaopraya river
-    basin between 1987 and 2021.  Raw data provided by Thai Meteorological Department
+    basin between 1987 and 2022.  Raw data provided by Thai Meteorological Department
     (TMD).
   version: 2.0.0
 servers:
-- url: /rain-api/v2
+- url: http://127.0.0.1:8080/rain-api/v2
 paths:
   /basins:
     get:
@@ -49,6 +49,10 @@ paths:
                 basinId: $response.body#/basinId
             annualRainfall:
               operationId: controller.get_basin_annual_rainfall
+              parameters:
+                basinId: $response.body#/basinId
+            allAnnualRainfalls:
+              operationId: controller.get_all_year_basin_annual_rainfall
               parameters:
                 basinId: $response.body#/basinId
       x-openapi-router-controller: swagger_server.controllers.default_controller
@@ -153,6 +157,29 @@ paths:
                   $ref: '#/components/schemas/MonthlyAverage'
                 x-content-type: application/json
       x-openapi-router-controller: swagger_server.controllers.default_controller
+  /basins/{basinId}/allAnnualRainfalls:
+    get:
+      summary: Returns all annual rainfall in all years for a selected basin
+      operationId: controller_get_all_year_basin_annual_rainfall
+      parameters:
+      - name: basinId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AnnualRainfall'
+                x-content-type: application/json
+      x-openapi-router-controller: swagger_server.controllers.default_controller
 components:
   schemas:
     Basin:
@@ -198,6 +225,9 @@ components:
         amount:
           type: number
           description: Rainfall amount in mm
+      example:
+        amount: 6.02745618307040320615897144307382404804229736328125
+        year: 0
     MonthlyAverage:
       type: object
       properties:

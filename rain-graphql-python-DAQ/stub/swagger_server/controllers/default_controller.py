@@ -1,10 +1,24 @@
 import connexion
 import six
 
+from swagger_server.models.annual_rainfall import AnnualRainfall  # noqa: E501
 from swagger_server.models.basin import Basin  # noqa: E501
 from swagger_server.models.monthly_average import MonthlyAverage  # noqa: E501
 from swagger_server.models.station import Station  # noqa: E501
 from swagger_server import util
+
+
+def controller_get_all_year_basin_annual_rainfall(basin_id):  # noqa: E501
+    """Returns all annual rainfall in all years for a selected basin
+
+     # noqa: E501
+
+    :param basin_id: 
+    :type basin_id: int
+
+    :rtype: List[AnnualRainfall]
+    """
+    return 'do some magic!'
 
 
 def controller_get_basin_annual_rainfall(basin_id, year):  # noqa: E501
