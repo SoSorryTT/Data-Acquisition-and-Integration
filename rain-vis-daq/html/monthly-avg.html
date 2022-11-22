@@ -31,6 +31,8 @@
       var table = json.data;
 
       var data = [];
+
+      // use for each
       table.basins.forEach(basin => {
         data.push({
           x: basin.avgMonthlyRainfalls.map(row => row.month),
@@ -39,6 +41,26 @@
           name: basin.name,
         })
       });
+
+      // use for of
+      // for (i of table.basins) {
+      //   data.push({
+      //     x: i.avgMonthlyRainfalls.map(row => row.month),
+      //     y: i.avgMonthlyRainfalls.map(row => row.amount),
+      //     type: 'line',
+      //     name: i.name,
+      //   })
+      // }
+
+      // use for in
+      // for (i in table.basins) {
+      //   data.push({
+      //     x: table.basins[i].avgMonthlyRainfalls.map(row => row.month),
+      //     y: table.basins[i].avgMonthlyRainfalls.map(row => row.amount),
+      //     type: 'line',
+      //     name: i.name,
+      //   })
+      // }
 
       var layout = {
         title: 'Average Monthly Rainfalls for all Basins',
