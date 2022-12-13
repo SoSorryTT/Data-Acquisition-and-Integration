@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+  title: Regis-daq-final
+  description:
+    This API provides the information over regis database(DAQ-fial).
+  version: 2.0.0
+servers:
+  - url: http://127.0.0.1:8080/regis/v1
+paths:
+  /{semester}/{studentId}/credits:
+    parameters:
+    - name: semester
+      in: path
+      required: true
+      schema:
+        type : string
+    - name: studentId
+      in: path
+      required: true
+      schema:
+        type : integer
+    get:
+      summary: Returns the total credits the student enrolled in the semester.
+      operationId: controller.get_student_total_credits_in_semester
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Total_credit'
+  /{semester}/{studentId}/course:
+    parameters:
+    - name: semester
+      in: path
+      required: true
+      schema:
+        type : string
+    - name: studentId
+      in: path
+      required: true
+      schema:
+        type : integer
+    get:
+      summary: Returns a list of courses the student enrolled on in the semester.
+      operationId: controller.get_student_list_course_in_semester
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/List_course'
+
+
+components:
+  schemas:
+    student:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+    course:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        credits:
+          type: integer
+          description: Credit of the course
+    enrollment:
+      type: object
+      properties:
+        semester:
+          type: string
+        student_id:
+          type: integer
+          description: Id of each student
+        course_id:
+          type: integer
+          description: Id of each course
+        grade:
+          type: string
+          description: Grade of each course.
+    Total_credit:
+      type: object
+      properties:
+        semester:
+          type: string
+        student_id:
+          type: integer
+          description: Id of each student
+        credit:
+          type: integer
+          description: Total credit of the course that student enroll.
+    List_course:
+      type: object
+      properties:
+        course_id:
+          type: integer
+          description: Id of each course.
+        course_name:
+          type: string
+        grade:
+          type: string
+          description: Grade of each course.
